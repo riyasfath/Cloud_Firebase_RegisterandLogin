@@ -37,7 +37,18 @@ public class login extends AppCompatActivity {
             public void onClick(View v) {
                 String mail=email.getText().toString().trim();
                 String pass= password.getText().toString().trim();
-                LoginUser(mail,pass);
+
+
+
+                    auth.signInWithEmailAndPassword(mail,pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            Toast.makeText(login.this, "LoginSuccess", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(login.this,MainActivity.class));
+                            finish();
+                        }
+                    });
+
 
 
 
@@ -46,14 +57,5 @@ public class login extends AppCompatActivity {
 
     }
 
-    private void LoginUser(String mail, String pass) {
-        auth.signInWithEmailAndPassword(mail,pass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                Toast.makeText(login.this, "LoginSuccess", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(login.this,MainActivity.class));
-                finish();
-            }
-        });
-    }
+
 }
